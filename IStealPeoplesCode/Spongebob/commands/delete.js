@@ -2,7 +2,7 @@ const url = require("is-url");
 
 exports = module.exports = async (client, msg, args) => {
   args = args.join(" ");
-  if(url(args) || url("https://"+args)) {
+  if(url(args) || url("https://"+args) && !(await client.db.has(args))) {
     const obj = {};
     for(const [key, val] of client.db.entries()) {
       obj[key] = val;
