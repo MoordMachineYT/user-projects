@@ -4,7 +4,5 @@ These are the requirements almost every project must meet. Please note that thes
 | <h3>Type</h3> | <h3>Max. duration</h3> | <h3>Language</h3> | <h3>Native support</h3> |
 |:---:|:---:|:---:|:---:|
 | Discord bot | 3d | JavaScript, Python, C# | Depends |
-|:---:|:---:|:---:|:---:|
 | Node module | 3d | JavaScript | No |
-|:---:|:---:|:---:|:---:|
 | .NET Core<br>Console Application | 2d | C# | No |
