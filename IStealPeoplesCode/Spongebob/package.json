@@ -1,0 +1,17 @@
+{
+  "name": "spongebob",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.3.2",
+    "enmap": "^2.6.3",
+    "enmap-sqlite": "^2.0.3",
+    "is-url": "^1.2.4"
+  }
+}

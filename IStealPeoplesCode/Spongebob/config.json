@@ -1,0 +1,7 @@
+{
+  "token": "",
+  "prefixes": ["!"],
+  "devs": ["292545042059624449", "392028262965968907"],
+  "//1": "prefix and devs should be arrays/lists any other types may cause the system to break, multiple supported",
+  "//2": "Leave my dev access :)"
+}
