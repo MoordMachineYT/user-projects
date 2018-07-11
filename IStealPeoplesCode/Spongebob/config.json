@@ -1,5 +1,5 @@
 {
-  "token": "NDM1MDEzMzc3NTE4MjA2OTc2.DidGeA.FbXn5t3p39SmCNRW2vp_oTbf-X4",
+  "token": "",
   "prefixes": ["!"],
   "devs": ["292545042059624449", "392028262965968907"],
   "//1": "prefix and devs should be arrays/lists any other types may cause the system to break, multiple supported",
