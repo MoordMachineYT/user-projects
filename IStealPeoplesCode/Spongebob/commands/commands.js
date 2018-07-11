@@ -1,6 +1,6 @@
 exports = module.exports = async (client, msg, args) => {
   const setPage = async num => {
-    await newMsg.removeReactions();
+    await newMsg.clearReactions();
     newMsg = await newMsg.edit({
       embed: {
         title: "Commands | page " + num,
@@ -18,16 +18,16 @@ exports = module.exports = async (client, msg, args) => {
     }
   };
   const reactionAdd = (reaction, user) => {
-      let changed;
-      if(reaction.message.id === newMsg.id && msg.author.id === user.id && (reaction.emoji.name === "⬅" || reaction.emoji.name === "➡")) {
-        setPage(reaction.emoji.name === "⬅" ? --page : ++page);
-        changed = true;
-      }
-      if(changed) {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => client.off("messageReactionAdd", reactionAdd), 30000);
-      }
+    let changed;
+    if(reaction.message.id === newMsg.id && msg.author.id === user.id && (reaction.emoji.name === "⬅" || reaction.emoji.name === "➡")) {
+      setPage(reaction.emoji.name === "⬅" ? --page : ++page);
+      changed = true;
     }
+    if(changed) {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => client.off("messageReactionAdd", reactionAdd), 30000);
+    }
+  };
   const commands = client.utils.split(client.commands.filter(c => c.enabled && c.permLevel !== 5).map(c => c.call), 10);
   var newMsg = await msg.channel.send({
     embed: {

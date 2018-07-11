@@ -9,7 +9,7 @@ exports = module.exports = (client, msg, args) => {
   if(!args) {
     return msg.channel.send("No name given.");
   }
-  client.db.set(args, link);
+  client.db.set(`${msg.guild.id}_${args}`, link);
   msg.channel.send(`Set ${args} to show: ${link}`);
 };
 exports.call = "upload"; // The name to call the command with

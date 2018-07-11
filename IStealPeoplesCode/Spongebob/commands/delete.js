@@ -2,10 +2,10 @@ const url = require("is-url");
 
 exports = module.exports = async (client, msg, args) => {
   args = args.join(" ");
-  if(url(args) || url("https://"+args) && !(await client.db.has(args))) {
+  if(url(args) || url("https://"+args) && !(await client.db.has(`${msg.guild.id}_${args}`))) {
     const obj = {};
     for(const [key, val] of client.db.entries()) {
-      obj[key] = val;
+      obj[key.split("_")[1]] = val;
     }
     const keys = Object.keys(obj).filter(key => obj[key] === args);
     if(!keys.length) {
@@ -14,10 +14,10 @@ exports = module.exports = async (client, msg, args) => {
     keys.forEach(key => client.db.delete(key));
     msg.channel.send(`Deleted the following keys: "${keys.join("\", \"")}"`);
   } else {
-    if(!(await client.db.has(args))) {
+    if(!(await client.db.has(`${msg.guild.id}_${args}`))) {
       return msg.channel.send("Key not found.");
     }
-    client.db.delete(args);
+    client.db.delete(`${msg.guild.id}_${args}`);
     msg.channel.send(`Successfully deleted ${args}!`);
   }
 };

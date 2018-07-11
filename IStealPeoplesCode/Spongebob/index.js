@@ -94,5 +94,8 @@ function getPerms(client, cmd, msg) {
   // If the user is a developer then permission should be granted already
   if(cmd.permLevel === 5) return false;
 }
+client.on("ready", () => {
+  console.log("READYYYYYYYYYYYYYYYYYYYYYYYY");
+});
 
 client.login(config.token);
