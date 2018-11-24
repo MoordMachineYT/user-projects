@@ -13,7 +13,6 @@ client.accepted = require("./accepted.json");
 client.denied = require("./denied.json");
 client.timeouts = {};
 client.config = config;
-client.invites = [];
 
 fs.readdir(__dirname + "/commands", (err, files) => {
   if(err) throw err;
