@@ -53,38 +53,19 @@ client.on("messageReactionAdd", async(msg, emoji, user) => {
     clearTimeout(client.timeouts[obj.user]);
     delete client.timeouts[obj.user];
     const user = client.users.get(obj.user) || await client.getRESTUser(obj.user);
-    const invite = await client.createChannelInvite("510587377698471956", {
-      unique: true,
-      maxUses: 1,
-      maxAge: 0
-    });
-    client.invites.push(invite.code);
-    client.accepted[obj.user] = invite.code;
+    client.addGuildMemberRole("262669086201217024", obj.user, "510582312816214027");
+    client.accepted.push(obj.user);
     delete client.pending[obj.user];
     writeSafe(path.join(__dirname, "./pending.json"), JSON.stringify(client.pending));
     writeSafe(path.join(__dirname, "./accepted.json"), JSON.stringify(client.accepted));
     try {
       const channel = await client.getDMChannel(obj.user);
-      await channel.createMessage("Congrats! You've been accepted into the faction. Please join using this invite: https://discord.gg/" + invite.code);
+      await channel.createMessage("Congrats! You've been accepted into the faction. Welcome!");
       await client.createMessage(msg.channel.id, `Successfully accepted ${user.username}#${user.discriminator}`);
     } catch(err) {
-      await client.createMessage(msg.channel.id, `Failed to DM **${user.username}#${user.discriminator}**. Please tell them they can join using **https://discord.gg/${invite.code}**.`);
+      await client.createMessage(msg.channel.id, `Failed to DM **${user.username}#${user.discriminator}**. Please tell them they have been accepted.`);
     }
   }
-});
-
-client.on("guildMemberAdd", async(guild, member) => {
-  if(guild.id !== "262669086201217024") return;
-  const invites = (await guild.getInvites()).map(i => i.code);
-  let usedInvite = client.invites.find(i => !invites.includes(i));
-  if(usedInvite) {
-    const user = Object.keys(client.accepted).find(key => client.accepted[key] === usedInvite);
-    if(user && user !== member.id) {
-      member.ban();
-      guild.banMember(user);
-    }
-  }
-  client.invites = invites;
 });
 
 client.once("ready", () => {
@@ -117,7 +98,7 @@ client.connect();
 function writeSafe(path, val) {
   fs.unwatchFile(path, watchListeners[path]);
   fs.writeFileSync(path, val);
-  fs.watchFile(path, { persistent: false },watchListeners[path]);
+  fs.watchFile(path, { persistent: false }, watchListeners[path]);
 }
 
 exports.writeSafe = writeSafe;
