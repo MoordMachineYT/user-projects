@@ -4,7 +4,7 @@ const path = require("path");
 const { writeSafe } = require("../");
 
 exports.run = (client, msg, args) => {
-  const guild = client.guilds.get("");
+  const guild = client.guilds.get("262669086201217024");
   if(!guild.members.has(msg.author.id)) return;
   const member = guild.members.get(msg.author.id);
   const pos = guild.roles.get("510585407654592512").position;
