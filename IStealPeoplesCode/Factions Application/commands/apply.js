@@ -17,7 +17,7 @@ exports.run = async (client, msg) => {
     msg.channel.createMessage("Sorry! You've been denied access into the faction, your application was not good enough :(");
     return;
   }
-  if(client.accepted[msg.author.id]) {
+  if(~client.accepted.indexOf(msg.author.id)) {
     msg.channel.createMessage("You have already been accepted! Please check your DMs for an invite.");
   }
   try {
