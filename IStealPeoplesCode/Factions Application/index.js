@@ -95,31 +95,7 @@ client.on("error", console.error);
 client.connect();
 
 function writeSafe(path, val) {
-  fs.unwatchFile(path, watchListeners[path]);
-  fs.writeFileSync(path, val);
-  fs.watchFile(path, { persistent: false }, watchListeners[path]);
+  return fs.writeFileSync(path, val);
 }
 
 exports.writeSafe = writeSafe;
-
-const watchListeners = {
-  [path.join(__dirname, "./pending.json")]: function(curr, prev) {
-    if(curr.size !== prev.size) {
-      client.pending = JSON.parse(fs.readFileSync(path.join(__dirname, "./pending.json")));
-    }
-  },
-  [path.join(__dirname, "./accepted.json")]: function(curr, prev) {
-    if(curr.size !== prev.size) {
-      client.pending = JSON.parse(fs.readFileSync(path.join(__dirname, "./accepted.json")));
-    }
-  },
-  [path.join(__dirname, "./denied.json")]: function(curr, prev) {
-    if(curr.size !== prev.size) {
-      client.pending = JSON.parse(fs.readFileSync(path.join(__dirname, "./denied.json")));
-    }
-  }
-};
-
-for(const path in watchListeners) {
-  fs.watchFile(path, { persistent: false }, watchListeners[path]);
-}
