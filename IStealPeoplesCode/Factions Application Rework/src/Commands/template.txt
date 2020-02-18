@@ -1,0 +1,25 @@
+"use strict";
+
+const Eris = require("eris");
+
+const BaseCommand = require("../Client/Command");
+
+class Command extends BaseCommand {
+  constructor(client) {
+    super(client, {
+      name: "NAME",
+      description: "",
+      args: false
+    });
+  }
+  /**
+  *
+  * @param {Eris.Message} msg
+  * @param {String[]} args
+  */
+  onCommand(msg, args) {
+
+  }
+}
+
+module.exports = Command;
